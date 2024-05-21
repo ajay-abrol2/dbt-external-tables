@@ -15,6 +15,10 @@ if [[ ! -f $VENV ]]; then
     then
         echo "Installing dbt-sqlserver"
         pip install dbt-sqlserver --upgrade --pre
+    elif [ $1 == 'vertica' ]
+    then
+        echo "Installing dbt-vertica"
+        pip install dbt-vertica --upgrade --pre
     else
         echo "Installing dbt-$1"
         pip install dbt-$1 --upgrade --pre

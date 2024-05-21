@@ -1,0 +1,41 @@
+version: 2
+
+sources:
+  - name: vertica
+    database: vertica_db
+    schema: public
+    loader: gcloud storage
+  
+    tables:
+      - name: event
+        description: "External table of events, stored as CSV files in Cloud Storage"
+        external:
+          location: 'gs://bucket/path/*'
+          file_format: csv
+          exprasion: DELIMITED ','
+          options:
+            format: csv
+            skip_leading_rows: 1
+          
+            # if you want a partitioned table, file paths MUST be Hive-style: 
+            #   'gs://bucket/path/collector_hour=2020-01-01/'
+            #   'gs://bucket/path/collector_hour=2020-01-02/' (etc)
+            hive_partition_uri_prefix: 'gs://bucket/path/'
+          partitions:               
+            - name: col1
+              data_type: date
+        
+        columns:
+          - name: app_id
+            data_type: varchar(255)
+            description: "Application ID"
+          - name: domain_sessionidx
+            data_type: int
+            description: "A visit / session index"
+          - name: etl_tstamp
+            data_type: timestamp
+            description: "Timestamp event began ETL"
+          - name: contexts
+            data_type: varchar(255)
+            description: "Contexts attached to event by Tracker"
+      
