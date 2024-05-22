@@ -4,23 +4,18 @@ sources:
   - name: vertica
     database: vertica_db
     schema: public
-    loader: gcloud storage
+    loader: cloud storage
   
     tables:
       - name: event
         description: "External table of events, stored as CSV files in Cloud Storage"
         external:
-          location: 'gs://bucket/path/*'
+          location: 'http://10.20.73.36:33017/browser/external/*'
           file_format: csv
           exprasion: DELIMITED ','
           options:
             format: csv
             skip_leading_rows: 1
-          
-            # if you want a partitioned table, file paths MUST be Hive-style: 
-            #   'gs://bucket/path/collector_hour=2020-01-01/'
-            #   'gs://bucket/path/collector_hour=2020-01-02/' (etc)
-            hive_partition_uri_prefix: 'gs://bucket/path/'
           partitions:               
             - name: col1
               data_type: date

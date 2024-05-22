@@ -7,7 +7,7 @@ config:
     use_colors: True
 
 integration_tests:
-  target: postgres
+  target: vertica
   outputs:
 
     redshift:
@@ -77,4 +77,16 @@ integration_tests:
       database: "{{ env_var('AZURESQL_TEST_DBNAME') }}"
       authentication: CLI
       schema: dbt_external_tables_integration_tests_azuresql
+      threads: 1
+    
+    vertica:
+      type: vertica
+      driver: "python"
+      port: 5433
+      host: "{{ env_var('VERTICA_TEST_HOST') }}"
+      database: "{{ env_var('VERTICA_TEST_DBNAME') }}"
+      user: "{{ env_var('VERTICA_TEST_USER') }}"
+      pass: "{{ env_var('VERTICA_TEST_PASS') }}"
+      authentication: CLI
+      schema: dbt_external_tables_integration_tests_vertica
       threads: 1
