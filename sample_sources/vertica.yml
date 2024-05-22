@@ -10,7 +10,7 @@ sources:
       - name: event
         description: "External table of events, stored as CSV files in Cloud Storage"
         external:
-          location: 'http://10.20.73.36:33017/browser/external/*'
+          location: 's3://browser/external/*'
           file_format: csv
           exprasion: DELIMITED ','
           options:
