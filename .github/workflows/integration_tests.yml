@@ -64,4 +64,4 @@ jobs:
         VERTICA_TEST_PORT: ${{ secrets.VERTICA_TEST_PORT }}
         VERTICA_TEST_PASS: ${{ secrets.VERTICA_TEST_PASS }}
         VERTICA_TEST_HOST: ${{ secrets.VERTICA_TEST_HOST }}
-        VERTICA_TEST_PORT: ${{ secrets.VERTICA_TEST_PORT }}
+        
