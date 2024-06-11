@@ -18,7 +18,7 @@ jobs:
       matrix:
         python-version: [ "3.11"] # "3.10", "3.12"]
         dbt-version: ["1.7.0"] # "1.6.0", , "1.8.0b1"]
-        data-platform: ["vertica"]
+        data-platform: ["vertica"] #["redshift", "snowflake", "bigquery","vertica"]
 
     steps:
     - uses: actions/checkout@v3
@@ -59,8 +59,9 @@ jobs:
         BIGQUERY_PRIVATE_KEY_ID: ${{ secrets.BIGQUERY_PRIVATE_KEY_ID }}
         BIGQUERY_CLIENT_EMAIL: ${{ secrets.BIGQUERY_CLIENT_EMAIL }}
         BIGQUERY_CLIENT_ID: ${{ secrets.BIGQUERY_CLIENT_ID }}
-        VERTICA_TEST_DBNAME:  ${{ secrets.VERTICA_TEST_DBNAME }}
+        VERTICA_TEST_DBNAME: ${{ secrets.VERTICA_TEST_DBNAME }}
         VERTICA_TEST_USER: ${{ secrets.VERTICA_TEST_USER }}
         VERTICA_TEST_PORT: ${{ secrets.VERTICA_TEST_PORT }}
         VERTICA_TEST_PASS: ${{ secrets.VERTICA_TEST_PASS }}
         VERTICA_TEST_HOST: ${{ secrets.VERTICA_TEST_HOST }}
+        VERTICA_TEST_PORT: ${{ secrets.VERTICA_TEST_PORT }}

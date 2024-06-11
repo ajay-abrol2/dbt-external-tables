@@ -13,16 +13,19 @@
             {{- ',' if not loop.last -}}
         {% endfor %}
     )
-    As copy FROM {{external.location}} 
-        {% if external.file_format=='csv' -%}  {{external.exprasion}}  {%- endif %}
-        {% if external.file_format=='json' -%} PARSER FJSONPARSER(suppress_warnings='unmatched_key') {%- endif %}
-        {% if external.file_format=='avro' -%} WITH PARSER FAVROPARSER() {%- endif %}
-        {% if external.file_format=='parquet' -%} PARQUET {%- endif %}
-        
-    {% if partitions -%} partition columns (
+    AS copy FROM '{{external.location}}' 
+    {% if partitions -%} partition columns 
+
         {%- for partition in partitions -%}
             {{adapter.quote(partition.name)}} {{', ' if not loop.last}}
-        {%- endfor -%}
+        {%- endfor -%} 
     {%- endif %}
+
+    {% if external.file_format=='csv' -%}  DELIMITER ','  {%- endif %}
+    {% if external.file_format=='json' -%} PARSER FJSONPARSER(suppress_warnings='unmatched_key') {%- endif %}
+    {% if external.file_format=='avro' -%} WITH PARSER FAVROPARSER() {%- endif %}
+    {% if external.file_format=='parquet' -%} PARQUET {%- endif %}
+        
+    
    ;
 {% endmacro %}

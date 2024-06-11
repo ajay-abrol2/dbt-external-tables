@@ -82,11 +82,11 @@ integration_tests:
     vertica:
       type: vertica
       driver: "python"
-      port: 5433
+      port: "{{ env_var('VERTICA_TEST_PORT') }}"
       host: "{{ env_var('VERTICA_TEST_HOST') }}"
       database: "{{ env_var('VERTICA_TEST_DBNAME') }}"
-      user: "{{ env_var('VERTICA_TEST_USER') }}"
-      pass: "{{ env_var('VERTICA_TEST_PASS') }}"
+      username: "{{ env_var('VERTICA_TEST_USER') }}"
+      password: "{{ env_var('VERTICA_TEST_PASS') }}"
       authentication: CLI
       schema: dbt_external_tables_integration_tests_vertica
       threads: 1
