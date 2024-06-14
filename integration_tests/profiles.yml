@@ -82,7 +82,7 @@ integration_tests:
     vertica:
       type: vertica
       driver: "python"
-      port: "{{ env_var('VERTICA_TEST_PORT') }}"
+      port: 5433 #"{{ env_var('VERTICA_TEST_PORT') }}"
       host: "{{ env_var('VERTICA_TEST_HOST') }}"
       database: "{{ env_var('VERTICA_TEST_DBNAME') }}"
       username: "{{ env_var('VERTICA_TEST_USER') }}"
